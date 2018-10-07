@@ -22,26 +22,16 @@ export default class ArchiveWindow extends Component {
         }); 
     }
 
-    //Eventually this will be for updating, but initial text will be passed down from props
-
-    // handleTextInput(event) {
-    //     this.setState({ text: event.target.value }); 
-    // }
-
-    //We're going to want to get the imageURL from main page eventually. Use props. 
-    createArchive(event) {
+    createArchive() {
+        console.log("CHILD FUNCTION CALLED! :)"); 
         const { text } = this.state; 
-        if (event.key === "Enter" && text.length !== 0) {
-            const newArchive = {
-                text: this.props.text,
-                nasaURL: this.props.nasaURL
-            }
-            axios.post(url, newArchive).then(response => {
-                this.setState({ archives: response.data }); 
-            });
-        } else {
-            alert("Please enter some text!"); 
+        const newArchive = {
+            text: this.props.inputText,
+            nasaURL: this.props.nasaURL
         }
+        axios.post(url, newArchive).then(response => {
+            this.setState({ archives: response.data }); 
+        });
     }
 
     updateArchive(id, text) {
@@ -50,7 +40,7 @@ export default class ArchiveWindow extends Component {
         }); 
     }
 
-    editArchive(id) {
+    deleteArchive(id) {
         axios.delete(url + `/${id}`).then(response => { 
             this.setState({ archives: response.data }); 
         }); 
@@ -66,7 +56,8 @@ export default class ArchiveWindow extends Component {
                         <Archive id={archive.id} 
                         key={archive.id} 
                         text={archive.text} 
-                        editArchive ={this.editArchive} 
+                        imageURL={archive.nasaURL}
+                        editArchive ={this.updateArchive} 
                         deleteArchive={this.deleteArchive}/>
                       ))
                     }

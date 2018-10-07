@@ -12,6 +12,8 @@ class App extends Component {
       imageURL: "CosmoNasaBG.png",
       explanation: ""
     }
+    this.child = React.createRef(); 
+    this.create = this.create.bind(this); 
   }
 
   //NOTE: This will return a video sometimes so check 
@@ -24,7 +26,7 @@ class App extends Component {
       console.log('res.data', res.data); 
       console.log('res.data.media_type', res.data.media_type); 
       console.log('res.data.explanation', res.data.explanation); 
-      if (res.data.media_type == "image") {
+      if (res.data.media_type === "image") {
         this.setState({
           imageURL: res.data.url, 
           explanation: res.data.explanation, 
@@ -40,6 +42,10 @@ class App extends Component {
     this.setState({ input: val }); 
   }
 
+  create() {
+    this.child.current.createArchive()
+  }
+
   render() {
     return (
       <div className="App">
@@ -51,10 +57,10 @@ class App extends Component {
         <main>
           <div>
             <input placeholder="Enter caption!" onChange={ (event)=> this.handleInput(event.target.value)}></input>
-            <button>Save Archive</button>
+            <button onClick={ this.create }>Save Archive</button>
           </div>
           <div>
-            <ArchiveWindow nasaURL={this.state.imageURL} inputText={this.state.input}/> 
+            <ArchiveWindow ref={ this.child } nasaURL={this.state.imageURL} inputText={this.state.input}/> 
           </div>
         </main>
       </div>
