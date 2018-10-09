@@ -1,9 +1,8 @@
 import React, { Component } from 'react'; 
 import './Archive.css'; 
 
-//TODO see if this works
 // import FaTrash from "react-icons/lib/fa/trash";
-// import FaPencil from "react-icons/lib/fa/pencil";
+//import FaPencil from "react-icons/lib/fa/pencil";
 
 export default class Archive extends Component {
     constructor(props) {
@@ -23,12 +22,14 @@ export default class Archive extends Component {
 
     edit(event) {
         const { text } = this.state; 
-        const { id, edit } = this.props; 
+        const { id, edit } = this.props;
+        console.log('id and text', id, text); 
         if (event.key === "Enter" && text.length !== 0) {
-            edit(id, text); 
+            this.props.editArchive(id, text); 
             this.setState({ editing: false });
         } else {
-            //alert? 
+            //alert("HELLO WORLD");
+            console.log("Not enter"); 
         }
     }
 
@@ -41,15 +42,22 @@ export default class Archive extends Component {
             <div className="Archive_container">
                 <span className="Archive_time"></span>
                 {/* TODO make class, this is a test */}
-                <img src={imageURL} />
+                <div><img src={imageURL} /></div>
+                <div>
+                
+                
                 {
                     editing ? 
-                    <input className="Archive_input" value={this.state.text} onChange={this.handleChange} onKeyPress={this.edit}/>
+                    <input className="Archive_input" value={this.state.text} onChange={this.handleChange} onKeyPress={ (e) => this.edit(e) } placeholder="Update"/>
                     :
-                    <span className="Archive_text">{text}</span>
+                    <p className="Archive_text">{text}</p>
                 }
-                <span className="Archive_edit" onClick={ () => this.setState({ editing: !this.state.editing, text })}>Font Awesome Here</span>
-                <span className="Archive_delete" onClick={ () => deleteArchive(id) }>Other Font Awesome</span> }
+                </div>
+                <div>
+
+                <button className="Archive_edit" onClick={ (et) => this.setState({ editing: !this.state.editing, text }) }> Edit </button>
+                <button className="Archive_delete" onClick={ () => deleteArchive(this.props.id) }> Delete </button>
+                </div>
             </div>
             //Leave out time but we'll have this here temporarily just in case
         )

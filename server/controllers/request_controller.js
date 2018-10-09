@@ -25,7 +25,9 @@ module.exports = {
         if (indexOfArch === -1) {
             res.status(404).send(`A book with ${archID} does not exist`); 
         } else {
-            archives[indexOfArch] = { ...req.body, id: archives[indexOfArch].id }; 
+            archives[indexOfArch].text = req.body.text; 
+            console.log('arcive update', archives[indexOfArch]); 
+           // archives[indexOfArch] = { ...req.body, id: archives[indexOfArch].id }; 
             res.json(archives); 
         }
     }, 

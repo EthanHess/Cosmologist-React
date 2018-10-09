@@ -1,17 +1,23 @@
-.Archive__container {
+/* .Archive_container {
     width: calc(100% - 20px);
     height: 65px;
     padding: 0 10px;
-    background: #fff;
+    background: darkblue; 
     border-radius: 3px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-    position: relative;
+    position: relative; 
+  } */
+
+  .Archive_container {
+      border-radius: 10px; 
+      border-color: aqua; 
+      border-width: 2px;
   }
   
-  .Archive__time {
+  .Archive_time {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -19,30 +25,57 @@
     opacity: 0.5;
   }
   
-  .Archive__text {
-    position: absolute;
+  .Archive_text {
+    /* position: absolute;
     bottom: 10px;
-    left: 10px;
+    left: 10px; */
+    padding-bottom: 20px; 
+    height: 40px;
   }
   
-  .Archive__edit {
-    position: absolute;
-    top: 5px;
+  .Archive_edit {
+    /* position: absolute;
+    top: 20px;
     right: 30px;
+    width: 25%; 
     font-size: 13px;
-    cursor: pointer;
+    cursor: pointer; */
+    background-color: black;
+    color: white; 
+    border: 2px solid rgb(10, 176, 226);
   }
   
-  .Archive__delete {
-    position: absolute;
-    top: 5px;
+  .Archive_delete {
+    /* position: absolute;
+    top: 20px;
     right: 10px;
+    width: 25%; 
     font-size: 13px;
-    cursor: pointer;
+    cursor: pointer; */
+    background-color: black;
+    color: white; 
+    border: 2px solid rgb(10, 176, 226);
+  }
+
+  .Archive_delete, .Archive_edit {
+      width: 25%; 
+      height: 40px; 
+      border-radius: 5px; 
+      margin-bottom: 20px; 
+      transition-duration: 0.4s;
+      cursor: pointer;
+  }
+
+  .Archive_delete:hover, .Archive_edit:hover {
+      background-color: darkblue; 
   }
   
-  .Archive__input {
-    position: absolute;
+  .Archive_input {
+    /* position: absolute;
     bottom: 10px;
     width: calc(98% + 4px);
+    color: black;  */
+    height: 40px; 
+    background: lightblue; 
+    border-radius: 10px; 
   }

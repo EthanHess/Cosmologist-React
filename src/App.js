@@ -10,10 +10,12 @@ class App extends Component {
     super(); 
     this.state = {
       imageURL: "CosmoNasaBG.png",
-      explanation: ""
+      explanation: "",
+      zip: 19003 //empty? 
     }
     this.child = React.createRef(); 
     this.create = this.create.bind(this); 
+    this.fetchWeatherData = this.fetchWeatherData.bind(this); 
   }
 
   //NOTE: This will return a video sometimes so check 
@@ -38,6 +40,14 @@ class App extends Component {
     }); 
   }
 
+  fetchWeatherData() {
+    const apiKey = "bf7530b76d7a12467797821f211df585"; 
+    const fullWeatherURL = `http://api.openweathermap.org/data/2.5/weather?zip=${this.state.zip}&units=imperial&appid=${apiKey}`; 
+    axios.get(fullWeatherURL).then(res => {
+      console.log('res.data', res.data); 
+    }); 
+  }
+
   handleInput(val) {
     this.setState({ input: val }); 
   }
@@ -50,12 +60,16 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
+          <div className="cosmologist">
+            <img src="CosmoLogoReact.png"></img>
+            <button onClick={this.fetchWeatherData}> Weather </button>
+          </div>
           <img src={this.state.imageURL} className="App-logo" alt="logo" />
           <button onClick={ ()=> this.fetchNasaData() } >Get APOD</button>
           <p>{this.state.explanation}</p>
         </header>
         <main>
-          <div>
+          <div id="text_div">
             <input placeholder="Enter caption!" onChange={ (event)=> this.handleInput(event.target.value)}></input>
             <button onClick={ this.create }>Save Archive</button>
           </div>

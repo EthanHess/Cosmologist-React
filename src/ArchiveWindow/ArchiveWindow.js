@@ -14,6 +14,8 @@ export default class ArchiveWindow extends Component {
         this.state = {
             archives: [], 
         }
+        this.deleteArchive = this.deleteArchive.bind(this); 
+        this.updateArchive = this.updateArchive.bind(this); 
     }
 
     fetchArchives() {
@@ -34,7 +36,9 @@ export default class ArchiveWindow extends Component {
         });
     }
 
+    // "/text?"
     updateArchive(id, text) {
+        console.log('params', id, text); 
         axios.put(url + `/${id}`, { text }).then(response => {
             this.setState({ archives: response.data }); 
         }); 
